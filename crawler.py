@@ -5,6 +5,11 @@
 import requests
 
 ########################################################################################################
+#
+# Web Crawler
+#
+#########################################################################################################
+
 class Crawler(object):
     def __init__(self, locationMapping):
         self.__locationMapping = locationMapping.getLocationMapping()
