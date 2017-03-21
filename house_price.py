@@ -45,6 +45,7 @@ def getHouseInfo():
                 insertSQL = "INSERT INTO house_price(location, location_int, community_name, community_code, house_bedrooms, house_bedrooms_int, house_size, house_size_int, house_floor, house_floor_int, house_built_date, house_built_date_int, house_price, house_price_int, house_avg_price, house_avg_price_int) VALUES ('%s', %d, '%s', %d, '%s', %d, '%s', %d, '%s', %d, '%s', %d, '%s', %d, '%s', %d)" % (location, locationToInt, neighborhood[i], communityCode, houseBedrooms[i], houseBedroomsInt, houseSize[i], houseSizeInt, houseFloor[i], houseFloorInt, houseBuiltDate[i], houseBuiltDateInt, housePrice[i], housePriceInt, houseAvgPrice[i], houseAvgPriceInt)
 
                 dao.insert(insertSQL)
+                print 'Running...'
 
     dao.close()
 
@@ -63,6 +64,9 @@ def normalizeHouseBuiltDate(houseBuiltDate):
     return 2000
 
 def normalizeHouseFloor(houseFloor):
+    if len( houseFloor.split('/')) == 0 or len( houseFloor.split('/')) == 1:
+        return 6
+
     temp = re.findall(ur'(\d+)', houseFloor.split('/')[1])
     return int(temp[0])
 
