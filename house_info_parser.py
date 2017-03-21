@@ -12,9 +12,18 @@ class HouseInfoParser(object):
     def __init__(self):
         pass
 
-    def parseHttpResponse(self, houseLocation, houseInfo):
-        if not houseLocation or not houseInfo:
-            print('Either houseLocation = ' + houseLocation + ' or houseInfo = '+ houseInfo + 'are  not correct!')
+    def parseCommunityHttpResponse(self, communityResp):
+        if not communityResp:
+            print('communityResp = ' + communityResp + ' is empty')
+
+        communityInfo = re.findall(ur'<div class="info-panel".*?<a name="selectDetail".*?>(.*?)</a>', communityResp, re.S)
+
+        return communityInfo
+
+
+    def parseHttpResponse(self, houseInfo):
+        if not houseInfo:
+            print('HouseInfo = '+ houseInfo + 'is  not correct!')
 
         # 1. Get neighborhood
         neighborhood = re.findall(ur'<span class="nameEllipsis".*?>(.*?)</span>', houseInfo)
@@ -48,7 +57,7 @@ class HouseInfoParser(object):
         houseAvgPrice = re.findall(ur'<div class="price-pre".*?>(.*?)</div>', houseInfo, re.S)
         houseAvgPrice = [self.__normalizeStr(s) for s in houseAvgPrice]
 
-        return houseLocation, neighborhood, houseBedrooms, houseSize, houseFloor, houseBuiltDate, housePrice, houseAvgPrice
+        return neighborhood, houseBedrooms, houseSize, houseFloor, houseBuiltDate, housePrice, houseAvgPrice
 
     def __preProcess(self, houseBuiltDate, notCompleteIndexFlag):
         temp = houseBuiltDate[:]
