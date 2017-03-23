@@ -8,7 +8,7 @@ Going to use machine learning to predict Shanghai house price for myself
 
 ==================================================
 
-=          欢迎使用上海房屋预测机器人            =
+=          上海房屋价格预测                       =
 
 =                                                =
 
