@@ -69,4 +69,4 @@ Going to use machine learning to predict Shanghai house price for myself
 
 需要预测的数据为:  15 ,  1613 ,  4 ,  97 ,  6 ,  1998 ,  27319
 
-预测出来的价格为： [ 224.7398879]
+预测出来的价格为： [ ￥224.7398879万]
