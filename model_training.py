@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 from sklearn import model_selection
 from sklearn import linear_model
+from sklearn.preprocessing import PolynomialFeatures
 
 class Model(object):
     def __init__(self):
@@ -44,16 +45,33 @@ class Model(object):
 
 
     def getModel(self):
-        model = Model()
-        dataset = model.loadDataSet('./data/shuffled_house_price.csv')
+        dataset = self.loadDataSet('./data/shuffled_house_price.csv')
 
         # model.printDataSetDetail(dataset)
 
-        X_train, X_validation, Y_train, Y_validation = model.splitDataSet(dataset)
+        X_train, X_validation, Y_train, Y_validation = self.splitDataSet(dataset)
 
-        regression = model.trainModel(X_train, Y_train)
+        regression = self.trainModel(X_train, Y_train)
 
         return regression
+
+    def getPolynomialModel(self, degree):
+        dataset = self.loadDataSet('./data/shuffled_house_price.csv')
+        X_train, X_validation, Y_train, Y_validation = self.splitDataSet(dataset)
+
+        poly = PolynomialFeatures(degree=degree)
+        X_train_poly = poly.fit_transform(X_train)
+        regression = self.trainModel(X_train_poly, Y_train)
+
+        return poly, regression
+        
+
+    def polyPredictPrice(self, data, degree):
+        poly, regression = self.getPolynomialModel(degree)
+
+        data_poly = poly.fit_transform(data)
+
+        return regression.predict(data_poly)
 
 
     def predictPrice(self, data):

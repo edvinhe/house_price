@@ -74,7 +74,14 @@ def main():
 
     model = Model()
     print '需要预测的数据为: ', locationCode, ', ', communityCode, ', ', bedrooms, ', ', houseSize, ', ', houseFloor, ', ', houseBuiltDate, ', ', houseAvgPrice
-    print '预测出来的价格为：', model.predictPrice([[locationCode, communityCode, bedrooms, houseSize, houseFloor, houseBuiltDate, houseAvgPrice]])
+    print '=' * 50
+    print '线性回归预测出来的价格为：', model.predictPrice([[locationCode, communityCode, bedrooms, houseSize, houseFloor, houseBuiltDate, houseAvgPrice]])
+
+    print '-' * 50
+    print '二阶多项式回归预测出来的价格为：', model.polyPredictPrice([[locationCode, communityCode, bedrooms, houseSize, houseFloor, houseBuiltDate, houseAvgPrice]], 2)
+
+    print '-' * 50
+    print '三阶多项式回归预测出来的价格为：', model.polyPredictPrice([[locationCode, communityCode, bedrooms, houseSize, houseFloor, houseBuiltDate, houseAvgPrice]], 3)
 
 if __name__ == '__main__':
     main()
