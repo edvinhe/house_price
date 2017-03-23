@@ -9,6 +9,8 @@ from crawler import Crawler
 from house_info_parser import HouseInfoParser
 from string_to_int_mapping import LocationMappingToInt
 from dao import DAO
+from model_training import Model
+
 
 def getHouseInfo():
     locationMapping = LocationMapping()
